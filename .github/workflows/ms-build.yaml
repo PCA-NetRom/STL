@@ -24,8 +24,8 @@ jobs:
 
       - name: Run application
         run: |
-          ./x64/Release/"HandsOn - STL.exe" > release_output.txt
+          ./x64/Release/"HandsOn - STL.exe" > ./release_output.txt
 
       - name: Compare output
         run: |
-          diff --side-by-side --suppress-common-lines "./x64/Release/release_output.txt" "./output.txt"
+          diff --side-by-side --suppress-common-lines release_output.txt output.txt
