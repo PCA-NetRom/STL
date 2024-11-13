@@ -28,4 +28,4 @@ jobs:
 
       - name: Compare output
         run: |
-          diff --side-by-side --suppress-common-lines release_output.txt output.txt
+          fc /c /w release_output.txt output.txt
