@@ -1,55 +1,33 @@
 #include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
-struct Problem {
-    string name;
-    string speciality;
-};
-
-struct Doctor {
-    string id;
-    string speciality;
-};
-
-Problem currentProblem;
-
-bool matchesSpeciality(const Doctor& doctor) {
-    return doctor.speciality == currentProblem.speciality;
-}
-
-int main() {
+int main()
+{
     ifstream inFile("input.txt");
 
-    int n, m;
-    inFile >> n;
+    int no_problems, no_doctors;
+    string name, speciality;
+    
+    inFile >> no_problems;
 
-    vector<Problem> problems(n);
-    for (Problem& p : problems) {
-        inFile >> p.name >> p.speciality;
+    for (int i = 0; i < no_problems; i++)
+    {
+        inFile >> name;
+        inFile >> speciality;
+        cout << name << ' ' << speciality << '\n';
     }
 
-    inFile >> m;
-    vector<Doctor> doctors(m);
-    for (Doctor& d : doctors) {
-        inFile >> d.id >> d.speciality;
+    inFile >> no_doctors;
+
+    for (int i = 0; i < no_doctors; i++)
+    {
+        inFile >> name;
+        inFile >> speciality;
+        cout << name << ' ' << speciality << '\n';
     }
-
-    for (const Problem& p : problems) {
-        currentProblem = p;
-        auto it = find_if(doctors.begin(), doctors.end(), matchesSpeciality);
-
-        if (it != doctors.end()) {
-            cout << it->id << " " << p.name << endl;
-            doctors.erase(it);
-        }
-    }
-
-    inFile.close();
 
     return 0;
 }
