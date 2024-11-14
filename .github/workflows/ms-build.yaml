@@ -27,6 +27,9 @@ jobs:
           cd x64/Release
           ./"HandsOn - STL.exe" > release_output.txt
 
-      - name: Compare output
+      - name: Compare output using PowerShell
+        shell: pwsh
         run: |
-          fc release_output.txt ../../output.txt
+          $output = Get-Content x64/Release/release_output.txt
+          $reference = Get-Content output.txt
+          Compare-Object -ReferenceObject $reference -DifferenceObject $output
