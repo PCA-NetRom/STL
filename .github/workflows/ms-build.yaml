@@ -24,8 +24,9 @@ jobs:
 
       - name: Run application
         run: |
-          ./x64/Release/"HandsOn - STL.exe" > ./release_output.txt
+          cd x64/Release
+          ./"HandsOn - STL.exe" > release_output.txt
 
       - name: Compare output
         run: |
-          fc /c /w release_output.txt output.txt
+          fc release_output.txt ../../output.txt
