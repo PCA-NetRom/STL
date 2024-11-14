@@ -24,12 +24,13 @@ jobs:
 
       - name: Run application
         run: |
-          cd x64/Release
-          ./"HandsOn - STL.exe" > release_output.txt
+          "x64/Release/HandsOn - STL.exe" > release_output.txt
 
-      - name: Compare output using PowerShell
-        shell: pwsh
+      - name: Compare output
         run: |
-          $output = Get-Content x64/Release/release_output.txt
-          $reference = Get-Content output.txt
-          Compare-Object -ReferenceObject $reference -DifferenceObject $output
+          git diff --no-index --color -w --ignore-space-change --ignore-blank-lines release_output.txt output.txt
+        continue-on-error: true
+      
+      - name: Compare output_bonus
+        run: |
+          git diff --no-index --color -w --ignore-space-change --ignore-blank-lines release_output.txt output4_bonus.txt
